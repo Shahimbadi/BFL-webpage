@@ -1,0 +1,392 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #e65100;
+    --primary-light: #ff833a;
+    --secondary: #ffb300;
+    --secondary-light: #ffe54c;
+    --accent: #bf360c;
+    --text-dark: #212121;
+    --text-light: #f5f5f5;
+    --background: #fffbf7;
+}
+
+body {
+    background-color: var(--background);
+    overflow-x: hidden;
+}
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: background 400ms;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+}
+
+.btn:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-light);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 4px;
+    background: var(--secondary);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.map-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.map-pin {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.map-pin:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    top: 7px;
+    left: 7px;
+}
+
+.map-pin:hover {
+    transform: rotate(-45deg) scale(1.2);
+    box-shadow: 0 0 15px rgba(230, 81, 0, 0.6);
+}
+
+.map-pin-label {
+    position: absolute;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    color: var(--text-dark);
+    border: 1px solid #e0e0e0;
+    z-index: 3;
+}
+
+.map-pin:hover + .map-pin-label {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.product-category {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+.product-category.active {
+    border-bottom: 3px solid var(--primary);
+    color: var(--primary);
+}
+
+.product-category:hover:not(.active) {
+    color: var(--primary-light);
+}
+
+.social-icon {
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px);
+    color: var(--primary);
+}
+
+.newsletter-input {
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+}
+
+.newsletter-input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%23e65100'/%3E%3Ccircle cx='200' cy='300' r='80' fill='%23ffb300'/%3E%3Ccircle cx='400' cy='200' r='60' fill='%23ff833a'/%3E%3Ccircle cx='600' cy='400' r='100' fill='%23bf360c'/%3E%3Ccircle cx='800' cy='250' r='70' fill='%23ffe54c'/%3E%3Ccircle cx='1000' cy='350' r='90' fill='%23ff833a'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Product Styles */
+.product-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.product-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    background-color: #f5f5f5;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    transition: all 0.5s ease;
+    transform: scale(0.9);
+}
+
+.product-item:hover .product-image img {
+    transform: scale(1);
+}
+
+.product-details {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    color: black;
+    background: white;
+    text-align: center;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.product-item:hover .product-details {
+    transform: translateY(-5px);
+}
+
+.product-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+.product-item:hover .product-name {
+    color: var(--primary);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--primary);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.product-item:hover .product-badge {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .product-details {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .product-details {
+        padding: 8px;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Add a subtle pulse animation to the product cards */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.product-item {
+    animation: fadeInUp 0.6s ease forwards, pulse 2s infinite;
+}
+
+.product-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.product-item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Add a shine effect on hover */
+.product-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: skewX(-25deg);
+    transition: 0.5s;
+}
+
+.product-item:hover::after {
+    left: 150%;
+} 
